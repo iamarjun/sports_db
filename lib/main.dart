@@ -16,17 +16,14 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         MyHomePage.route: (context) => MyHomePage(),
-        League.route: (context) => League(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == League.route) {
-          final arg = settings.arguments;
+          final String country = settings.arguments;
           return MaterialPageRoute(
-            builder: (context) {
-              return League(
-                country: arg,
-              );
-            },
+            builder: (context) => League(
+              country: country,
+            ),
           );
         }
       },

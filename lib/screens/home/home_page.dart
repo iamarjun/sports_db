@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     } else if (state is CountrylistLoaded) {
                       return CountryList(
                         countryList: state.countryList,
-                        onTap: (country) => Navigator.pushNamed(
+                        onTap: (String country) => Navigator.pushNamed(
                           context,
                           League.route,
                           arguments: country,
