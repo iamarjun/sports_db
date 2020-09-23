@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sports_db/screens/detail/detail.dart';
 import 'package:sports_db/screens/home/home_page.dart';
 
 void main() {
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      routes: {
+        MyHomePage.route: (context) => MyHomePage(),
+        League.route: (context) => League(),
+      },
     );
   }
 }

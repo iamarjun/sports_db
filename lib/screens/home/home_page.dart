@@ -7,6 +7,7 @@ import 'package:sports_db/screens/home/widget/country_list.dart';
 import 'package:sports_db/service/api_service.dart';
 
 class MyHomePage extends StatefulWidget {
+  static final String route = '/';
   MyHomePage({Key key}) : super(key: key);
 
   @override
