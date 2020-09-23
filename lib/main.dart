@@ -10,7 +10,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -18,6 +17,18 @@ class MyApp extends StatelessWidget {
       routes: {
         MyHomePage.route: (context) => MyHomePage(),
         League.route: (context) => League(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == League.route) {
+          final arg = settings.arguments;
+          return MaterialPageRoute(
+            builder: (context) {
+              return League(
+                country: arg,
+              );
+            },
+          );
+        }
       },
     );
   }

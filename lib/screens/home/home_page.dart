@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sports_db/constants.dart';
+import 'package:sports_db/screens/detail/detail.dart';
 import 'package:sports_db/screens/home/bloc/countrylist_bloc.dart';
 import 'package:sports_db/screens/home/widget/country_list.dart';
 import 'package:sports_db/service/api_service.dart';
@@ -50,6 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     } else if (state is CountrylistLoaded) {
                       return CountryList(
                         countryList: state.countryList,
+                        onTap: (country) => Navigator.pushNamed(
+                          context,
+                          League.route,
+                          arguments: country,
+                        ),
                       );
                     } else if (state is CountrylistError) {
                       Scaffold.of(context).showSnackBar(

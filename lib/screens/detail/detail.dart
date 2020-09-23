@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class League extends StatelessWidget {
   static final String route = '/detail';
-  const League({Key key}) : super(key: key);
+  final String country;
+  const League({Key key, this.country}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
