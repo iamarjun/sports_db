@@ -1,10 +1,12 @@
-class Countries  {
-	String nameEn;
+import 'package:equatable/equatable.dart';
 
-	Countries({this.nameEn});
+class Country extends Equatable  {
+	final String nameEn;
 
-	factory Countries.fromJson(Map<String, dynamic> json) {
-		return Countries(
+	Country({this.nameEn});
+
+	factory Country.fromJson(Map<String, dynamic> json) {
+		return Country(
 			nameEn: json['name_en'],
 		);
 	}
@@ -15,5 +17,8 @@ class Countries  {
 		return data;
 	}
 
-
+	@override
+	List<Object> get props => [
+		this.nameEn
+	];
 }
