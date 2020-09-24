@@ -33,9 +33,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 'The Sports DB',
                 style: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.w500,
-                    color: kPrimaryTextColor),
+                  fontSize: 40.0,
+                  fontWeight: FontWeight.w500,
+                  color: kPrimaryTextColor,
+                ),
               ),
               SizedBox(
                 height: 20.0,
