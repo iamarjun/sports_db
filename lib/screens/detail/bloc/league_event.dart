@@ -6,3 +6,9 @@ abstract class LeagueEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchLeagues extends LeagueEvent {
+  final String country;
+
+  const FetchLeagues({this.country});
+}

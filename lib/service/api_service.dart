@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart';
+import 'package:sports_db/screens/detail/models/league.dart';
+import 'package:sports_db/screens/detail/models/leagues.dart';
 import 'package:sports_db/screens/home/models/countries.dart';
 import 'package:sports_db/screens/home/models/country_list.dart';
 import 'package:sports_db/service/api_exceptions.dart';
@@ -10,6 +12,7 @@ class Service {
   static const BASE_URL = 'https://www.thesportsdb.com/api/v1/json';
   static const API_KEY = '1';
   static const ALL_COUNTRIES = 'all_countries.php';
+  static const ALL_LEAGUES = 'search_all_leagues.php';
 
   Service._();
   static final Service _instance = Service._();
@@ -25,6 +28,18 @@ class Service {
       throw FetchDataException('No Internet connection');
     }
     return countries;
+  }
+  
+  Future<List<League>> fetchLeagues(String country) async {
+    List<League> leagues;
+    try {
+      final response = await get('$BASE_URL/$API_KEY/$ALL_LEAGUES?c=$country');
+      leagues = Leagues.fromJson(_returnResponse(response)).leagues;
+      print(leagues);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+    return leagues;
   }
 
   dynamic _returnResponse(Response response) {

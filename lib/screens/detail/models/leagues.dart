@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'league.dart';
 
 class Leagues extends Equatable {
-  final List<League> countrys;
+  final List<League> leagues;
 
-  Leagues({this.countrys});
+  Leagues({this.leagues});
 
   factory Leagues.fromJson(Map<String, dynamic> json) {
     return Leagues(
-      countrys: json['countrys'] != null
+      leagues: json['countrys'] != null
           ? json['countrys'].map<League>((v) => new League.fromJson(v)).toList()
           : null,
     );
@@ -16,12 +16,12 @@ class Leagues extends Equatable {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.countrys != null) {
-      data['countrys'] = this.countrys.map((v) => v.toJson()).toList();
+    if (this.leagues != null) {
+      data['countrys'] = this.leagues.map((v) => v.toJson()).toList();
     }
     return data;
   }
 
   @override
-  List<Object> get props => [this.countrys];
+  List<Object> get props => [this.leagues];
 }

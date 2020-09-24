@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:sports_db/constants.dart';
+import 'package:sports_db/screens/detail/bloc/league_bloc.dart';
+import 'package:sports_db/screens/detail/widget/league_list.dart';
+import 'package:sports_db/service/api_service.dart';
 
 class League extends StatelessWidget {
   static final String route = '/detail';
@@ -7,8 +13,63 @@ class League extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(country),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(country),
+      ),
+      body: BlocProvider(
+        create: (context) {
+          var bloc = LeagueBloc(service: Service());
+          bloc.add(FetchLeagues(country: country));
+          return bloc;
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  focusColor: kTextFieldFilledColor,
+                  hintText: 'Search leagues...',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      10.0,
+                    ),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.75,
+                child: BlocBuilder<LeagueBloc, LeagueState>(
+                  builder: (context, state) {
+                    if (state is LeagueInitial) {
+                      return _loading();
+                    } else if (state is LeagueLoading) {
+                      return _loading();
+                    } else if (state is LeagueLoaded) {
+                      return LeagueList(
+                        leagueList: state.leagues,
+                      );
+                    } else if (state is LeagueError) {
+                      Scaffold.of(context)
+                          .showSnackBar(SnackBar(content: Text(state.error)));
+                      return Container();
+                    }
+                  },
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _loading() {
+    return SpinKitChasingDots(
+      color: kPrimaryColor,
     );
   }
 }
