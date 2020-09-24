@@ -10,6 +10,7 @@ import 'package:sports_db/service/api_exceptions.dart';
 
 class Service {
   static const BASE_URL = 'https://www.thesportsdb.com/api/v1/json';
+  static const BASE_URL_SEARCH = 'https://www.thesportsdb.com/api/v1/json/1/search_all_leagues.php?c=England&s=Soccer';
   static const API_KEY = '1';
   static const ALL_COUNTRIES = 'all_countries.php';
   static const ALL_LEAGUES = 'search_all_leagues.php';
@@ -29,11 +30,23 @@ class Service {
     }
     return countries;
   }
-  
+
   Future<List<League>> fetchLeagues(String country) async {
     List<League> leagues;
     try {
       final response = await get('$BASE_URL/$API_KEY/$ALL_LEAGUES?c=$country');
+      leagues = Leagues.fromJson(_returnResponse(response)).leagues;
+      print(leagues);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+    return leagues;
+  }
+
+  Future<List<League>> searchLeagues(String country, String searchQuery) async {
+    List<League> leagues;
+    try {
+      final response = await get('$BASE_URL/$API_KEY/$ALL_LEAGUES?c=$country&s=$searchQuery');
       leagues = Leagues.fromJson(_returnResponse(response)).leagues;
       print(leagues);
     } on SocketException {

@@ -25,5 +25,16 @@ class LeagueBloc extends Bloc<LeagueEvent, LeagueState> {
         yield LeagueError(error: e.toString());
       }
     }
+
+    if (event is SearchLeagues) {
+      yield LeagueInitial();
+      try {
+        final response =
+            await service.searchLeagues(event.country, event.query);
+        yield LeagueLoaded(leagues: response);
+      } catch (e) {
+        yield LeagueError(error: e.toString());
+      }
+    }
   }
 }

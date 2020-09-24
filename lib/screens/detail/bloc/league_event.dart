@@ -12,3 +12,9 @@ class FetchLeagues extends LeagueEvent {
 
   const FetchLeagues({this.country});
 }
+
+class SearchLeagues extends LeagueEvent {
+  final String query;
+  final String country;
+  const SearchLeagues({this.query, this.country});
+}
