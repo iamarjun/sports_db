@@ -34,7 +34,7 @@ class LeagueList extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       leagueList[index].strLeague,
@@ -58,6 +58,9 @@ class LeagueList extends StatelessWidget {
                           'asset/twitter.svg',
                           height: 35,
                           color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10.0,
                         ),
                         SvgPicture.asset(
                           'asset/facebook.svg',
